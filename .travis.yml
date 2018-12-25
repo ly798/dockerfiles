@@ -1,0 +1,17 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - cd ./ssr-client && docker build -t $DOCKER_USERNAME/ssr-client:latest .
+  - cd ../adminer && docker build -t $DOCKER_USERNAME/adminer:latest .
+
+script:
+  - docker images $DOCKER_USERNAME/ssr-client:latest
+  - docker images $DOCKER_USERNAME/adminer:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push $DOCKER_USERNAME/ssr-client:latest
+  - docker push $DOCKER_USERNAME/adminer:latest

@@ -1,0 +1,17 @@
+{
+    "server":"1.1.1.1",
+    "server_ipv6":"::",
+    "server_port":10000,
+    "local_address": "0.0.0.0",
+    "local_port":1080,
+    "password":"",
+    "timeout":300,
+    "udp_timeout":60,
+    "method":"chacha20",
+    "protocol":"auth_sha1_v4_compatible",
+    "protocol_param":"",
+    "obfs":"tls1.2_ticket_auth_compatible",
+    "obfsparam": "",
+    "fast_open":false,
+    "workers":2
+}

@@ -1,0 +1,4 @@
+[submodule "shadowsocksr"]
+	path = ssr-client/shadowsocksr
+	url = https://github.com/shadowsocksrr/shadowsocksr.git
+	branch = manyuser
