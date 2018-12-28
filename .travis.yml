@@ -4,14 +4,14 @@ services:
   - docker
 
 before_install:
-  - cd ./ssr-client && docker build -t $DOCKER_USERNAME/ssr-client:latest .
-  - cd ../adminer && docker build -t $DOCKER_USERNAME/adminer:latest .
+  - for name in $NAMES; do cd ./$name && docker build -t $DOCKER_USERNAME/$name:latest . && cd ../; done
 
 script:
-  - docker images $DOCKER_USERNAME/ssr-client:latest
-  - docker images $DOCKER_USERNAME/adminer:latest
+  - for name in $NAMES; do docker images $DOCKER_USERNAME/$name:latest; done
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push $DOCKER_USERNAME/ssr-client:latest
-  - docker push $DOCKER_USERNAME/adminer:latest
+  - for name in $NAMES; do docker push $DOCKER_USERNAME/$name:latest; done
+
+env:
+  - NAMES=`ls | grep -v README.md`
