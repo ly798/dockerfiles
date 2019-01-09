@@ -4,14 +4,11 @@ services:
   - docker
 
 before_install:
-  - for name in $NAMES; do cd ./$name && docker build -t $DOCKER_USERNAME/$name:latest . && cd ../; done
+  - sh ./.docker_image.sh build
 
 script:
-  - for name in $NAMES; do docker images $DOCKER_USERNAME/$name:latest; done
+  - sh ./.docker_image.sh show
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - for name in $NAMES; do docker push $DOCKER_USERNAME/$name:latest; done
-
-env:
-  - NAMES=`ls | grep -v README.md`
+  - sh ./.docker_image.sh push

@@ -1,0 +1,9 @@
+FROM golang:1.10.2
+
+RUN git clone https://github.com/keycloak/keycloak-gatekeeper.git /go/src/github.com/keycloak/keycloak-gatekeeper \
+ &&cd /go/src/github.com/keycloak/keycloak-gatekeeper \
+ && make static \
+ && cp /go/src/github.com/keycloak/keycloak-gatekeeper/bin/keycloak-gatekeeper /opt
+
+#ENTRYPOINT [ "/opt/keycloak-gatekeeper" ]
+CMD /opt/keycloak-gatekeeper --config /config.yaml
