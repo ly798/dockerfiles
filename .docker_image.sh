@@ -7,8 +7,8 @@ do
 
     for dockerfile_name in `ls | grep Dockerfile`
     do
-        tag=`echo $dockerfile_name | awk -F'.' '{print $2}'`
-        if [ "$tag" = "" ]
+        tag=`echo $dockerfile_name | cut -d'.' -f2-`
+        if [ "$tag" = "Dockerfile" ]
         then
             tag="latest"
         fi
