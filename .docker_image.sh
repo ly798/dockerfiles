@@ -15,12 +15,15 @@ do
 
         case "$1" in
         build)
+            echo "==============================start build $name:$tag"
             docker build -t $DOCKER_USERNAME/$name:$tag -f ./$dockerfile_name .
             ;;
         show)
+            echo "==============================start show $name:$tag"
             docker images $DOCKER_USERNAME/$name:$tag
             ;;
         push)
+            echo "==============================start push $name:$tag"
             docker push $DOCKER_USERNAME/$name:$tag
             ;;
         *)
