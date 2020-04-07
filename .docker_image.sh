@@ -1,6 +1,7 @@
 #!/bin/sh
 
-NAMES=`ls | grep -v README.md`
+#NAMES=`ls | grep -v README.md`
+NAMES=`git diff --name-only HEAD~ HEAD | grep '/' | awk -F/ '{print $1}' | uniq`
 for name in $NAMES
 do
     cd ./$name
